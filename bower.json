@@ -1,0 +1,34 @@
+{
+  "name": "twitter",
+  "version": "0.0.1",
+  "authors": [
+    "HippoCracker <zesheng.zong@gmail.com>"
+  ],
+  "description": "Final project of Web Design class",
+  "keywords": [
+    "twitter",
+    "blog",
+    "final-project"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "grunt-contrib-uglify": "~0.9.1",
+    "grunt-contrib-compass": "~1.0.3",
+    "grunt-contrib-watch": "~0.6.1",
+    "bourbon": "~4.2.3"
+  },
+  "dependencies": {
+    "matchdep": "~0.3.0",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "angular": "~1.4.4"
+  }
+}

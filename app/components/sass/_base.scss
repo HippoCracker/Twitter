@@ -1,0 +1,28 @@
+@import url('http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css');
+
+body {
+	font-family: $font-primary;
+  font-size: 1.2rem;
+  line-height: 160%;
+  color: $blue;
+}
+
+#{headings()} {
+  color: $black;
+}
+
+a {
+  text-decoration: none;
+
+  &:visited {
+  	color: $blue;
+  }
+}
+
+#nav-bar {
+	a {
+		text-decoration: none;
+	}
+}

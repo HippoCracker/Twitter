@@ -1,0 +1,55 @@
+[
+    {
+      "username": "zesheng zong",
+      "timestamp": "1h",
+      "content": "this is a simple test for angular js",
+      "replyNum":0,
+      "retweetNum":0,
+      "favoriteNum":0
+     },
+
+    {
+      "username": "Can Zhang",
+      "timestamp": "58m",
+      "content": "Today is a happly day, I want try something new!",
+      "replyNum":0,
+      "retweetNum":0,
+      "favoriteNum":0
+    },
+
+    {
+      "username": "Xikun Zhang",
+      "timestamp": "5h",
+      "content": "Just be yourself!",
+      "replyNum":0,
+      "retweetNum":0,
+      "favoriteNum":0
+    },
+
+    {
+      "username": "Kailong Tang",
+      "timestamp": "10h",
+      "content": "I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!I love data2!",
+      "replyNum":0,
+      "retweetNum":0,
+      "favoriteNum":0
+    },
+
+    {
+      "username": "zesheng zong",
+      "timestamp": "1 day",
+      "content": "Prepare for the final exam of Web Design",
+      "replyNum":0,
+      "retweetNum":0,
+      "favoriteNum":0
+    },
+
+    {
+      "username": "Can Zhang",
+      "timestamp": "1 day",
+      "content": "Let\"s do some exercise",
+      "replyNum":0,
+      "retweetNum":0,
+      "favoriteNum":0
+    }
+  ]

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="twitterApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Twitter</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+<body ng-controller="MainPageCtrl">
+  <header>
+    <section class="hero">
+      <div class="hero-container">
+        <div class="wrap">
+          <section class="hero-icon-button">
+            <div class="icon">
+              <a href="#">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </div><!-- icon -->
+            <div class="btn-group">
+              <a id="signup-btn" href="#">Sign up</a>
+              <a id="login-btn" href="#">Log in</a>
+            </div><!-- btn-group -->
+          </section><!-- hero-icon-button -->
+          
+          <section class="hero-content">
+            <h2>See what's happening right now.</h2>
+            <p class="blurb">Find community, conversation and inspiration about the things you love.</p>
+          </section><!-- hero-content -->
+        </div><!-- wrap -->
+      </div><!-- hero-container -->
+      <div class="wrap">
+        <nav>
+          <ul id="nav-bar" class="">
+            <li><a id="nav-search" href="#"><i class="fa fa-search"></i></a></li>
+            <li><a href="#" class="active">Featured</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Music</a></li>
+            <li><a id="nav-more"href="#">More <i class="fa fa-angle-down"></i></a></li>
+          </ul>
+          <div id="search-bar" class="hide">
+            <a href="#"><i class="fa fa-times"></i></a>
+            <input id="search-input" type="text" name="search-key" ng-model="userInput">
+            <a href="#"><i class="fa fa-search"></i></a> 
+          </div>
+          <div id="search-result" class="dropdown-list">
+            <ul>
+              <li ng-repeat="key in suggestKeys | filter: userInput">
+                <a href="#">{{key}}</a>
+              </li>
+            </ul>
+          </div><!-- search-result -->
+          <div id="more-options" class="dropdown-list hide">
+            <ul>
+              <li><a href="#">Humor</a></li>
+              <li><a href="#">Entertainment</a></li>
+              <li><a href="#">Technology & Science</a></li>
+              <li><a href="#">Art & Culture</a></li>
+              <li><a href="#">Fashion & Style</a></li>
+              <li><a href="#">Government & Nonprofits</a></li>
+            </ul>
+          </div><!-- more-options -->
+        </nav>
+      </div><!-- wrap -->
+    </section><!-- hero -->
+  </header>
+
+  <div class="login-regist-modal hide">
+    <div class="login-regist-modal-container">
+      <ul class="switcher">
+        <li><a href="#" class="selected">Sign in</a></li>
+        <li><a href="#">New account</a></li>
+      </ul><!-- panel-switcher -->
+
+      <section id="login" class="is-selected">
+        <form action="php/login.php" method="post" class="lr-form" novalidate name="loginForm">
+          <p class="fieldset">
+            <label for="signin-email" class="email icon">
+              <i class="fa fa-envelope"></i>
+            </label>
+            <input class="full-width has-padding has-border" id="signin-email" type="email" name="email" placeholder="E-mail" required ng-model="user.email">
+            
+            <span class="error-message"  ng-show="loginForm.email.$dirty && loginForm.email.$invalid">
+              <i class="fa fa-exclamation-circle"></i> 
+              {{getError(loginForm.email.$error)}}
+            </span>
+          </p><!-- fieldset -->
+
+          <p class="fieldset">
+            <label for="signin-password" class="password icon">
+              <i class="fa fa-key"></i>
+            </label>
+            <input class="full-width has-padding has-border" id="signin-password" type="password" name="password" placeholder="Password" ng-model="user.password" required>
+            
+            <span class="error-message"  ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
+              <i class="fa fa-exclamation-circle"></i> 
+              {{getError(loginForm.password.$error)}}
+            </span>
+          </p><!-- fieldset -->
+
+          <p class="fieldset">
+            <input type="checkbox" id="remember-me" name="isRemember" checked ng-model="user.isRemember">
+            <label for="remember-me">Remember me</label>
+          </p><!-- fieldset -->
+
+          <p class="fieldset">
+            <input type="submit" class="full-width" value="Log in" ng-disabled="loginForm.$invalid">
+          </p><!-- fieldset -->
+        </form><!-- login-form -->
+
+        <p class="form-bottom-message"><a href="#">Forgot your password?</a></p>
+      </section><!-- user-login -->
+
+      <section id="signup">
+        <form name="signupForm" class="lr-form" ng-submit="addUser(newUser)">
+          <p class="fieldset">
+            <label for="signup-username" class="username icon">
+              <i class="fa fa-user"></i>
+            </label>
+            <input class="full-width has-padding has-border" id="signup-username" name="username" type="text" placeholder="Username" ng-model="newUser.username" required>
+            <span class="error-message"  ng-show="signupForm.username.$dirty && signupForm.username.$invalid">
+              <i class="fa fa-exclamation-circle"></i> 
+              {{getError(signupForm.username.$error)}}
+            </span>
+          </p><!-- fieldset -->
+
+          <p class="fieldset">
+            <label for="signup-email" class="email icon">
+              <i class="fa fa-envelope"></i>
+            </label>
+            <input class="full-width has-padding has-border" id="signup-email" type="email" name="email" placeholder="E-mail" ng-model="newUser.email" required>
+
+            <span class="error-message"  ng-show="signupForm.email.$dirty && signupForm.email.$invalid">
+              <i class="fa fa-exclamation-circle"></i> 
+              {{getError(signupForm.email.$error)}}
+            </span>
+          </p><!-- fieldset -->
+
+          <p class="fieldset">
+            <label for="signup-password" class="password icon">
+              <i class="fa fa-key"></i>
+            </label>
+            <input class="full-width has-padding has-border" id="signup-password" type="password" name="password" placeholder="Password" ng-model="newUser.password" required>
+
+            <span class="error-message"  ng-show="signupForm.password.$dirty && signupForm.password.$invalid">
+              <i class="fa fa-exclamation-circle"></i> 
+              {{getError(signupForm.password.$error)}}
+            </span>
+          </p><!-- fieldset -->
+
+          <p class="fieldset">
+            <input type="checkbox" id="accept-terms" name="isAccepted" ng-model="isAccepted" checked required>
+            <label for="accept-terms">I agree to the <a href="#">Terms</a></label>
+          </p><!-- fieldset -->
+
+          <p class="fieldset">
+            <input type="submit" class="full-width has-padding" value="Create account" ng-disabled="signupForm.$invalid">
+          </p><!-- fieldset -->
+        </form><!-- lr-form -->
+      </section><!-- user-signup -->
+
+      <section id="reset-password">
+        <p class="form-message">Lost your password? Please enter your email address. You will receive a link to create a new password</p>
+
+        <form method="post" name="resetPasswordForm" class="lr-form" ng-submit="resetPassword(findUser)">
+          <p class="fieldset">
+            <label class="email icon" for="reset-email">
+              <i class="fa fa-envelope"></i>
+            </label>
+            <input class="full-width has-padding has-border" id="reset-email" type="email" name="email" placeholder="E-mail" ng-model="findUser.email" required>
+            
+            <span class="error-message"  ng-show="resetPasswordForm.email.$dirty && resetPasswordForm.email.$invalid">
+              <i class="fa fa-exclamation-circle"></i> 
+              {{getError(resetPasswordForm.email.$error)}}
+            </span>
+          </p><!-- fieldset -->
+
+          <p class="fieldset">
+            <input class="full-width has-padding" type="submit" value="Reset password" ng-disabled="resetPasswordForm.$invalid">
+          </p><!-- fieldset -->
+        </form><!-- lr-form -->
+
+        <p class="form-bottom-message"><a href="#">Back to login</a></p>
+      </section><!-- reset-password -->
+      <a id="close-form" href="#" class="close-form"><i class="fa fa-times"></i></a>
+
+    </div><!-- login-regist-panel-container -->
+  </div><!-- login-regist-panel -->
+
+  <div class="content-list">
+    <section class="wrap">
+      <div class="contents" data-col-min-width="280">
+
+        <article class="post" ng-repeat="tweet in userTweets.tweets | filter:userInput">
+          <header>
+            <div class="user-info-container">
+              <a href="#">
+                <img src="images/users/user1.jpeg" alt="user photo">
+                <strong class="username">{{tweet.username}}</strong>
+                <span class="screenname-link">@{{tweet.username}}</span>
+              </a>
+            </div>
+            <span class="timestamp">{{tweet.timestamp}}</span>
+          </header>
+          <section class="post-content">
+            <p>{{tweet.content}}</p>
+          </section>
+          <footer class="post-footer">
+            <ul>
+              <li>
+                <a href="reply" class="reply">
+                  <i class="fa fa-reply"></i>
+                  <span class="value">{{tweet.reply_num}}</span>
+                </a>
+              </li>
+              <li>
+                <a href="retweet" class="retweet">
+                  <i class="fa fa-retweet"></i>
+                  <span class="value">{{tweet.retweet_num}}</span>
+                </a>
+              </li>
+              <li>
+                <a href="favorite" class="favorite">
+                  <i class="fa fa-thumbs-up"></i>
+                  <span class="value">{{tweet.favorite_num}}</span>
+                </a>
+              </li>
+            </ul>
+          </footer>
+        </article><!-- post -->
+        
+      </div><!-- contents -->
+    </section><!-- layout -->
+  </div><!-- content-list -->
+
+  <footer class="page-footer">
+    <div class="wrap">
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Status</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Cookies</a></li>
+        <li><a href="#">Ads info</a></li>
+        <li><a href="#">Brand</a></li>
+        <li><a href="#">Apps</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="#">Businesses</a></li>
+        <li><a href="#">Media</a></li>
+        <li><a href="#">Developers</a></li>
+        <li><a href="#">Directory</a></li>
+        <li>&copy;2015 Twitter</li>
+      </ul>
+    </div>
+  </footer>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/jquery.waterfall.js"></script>
+  <script src="js/zepto.js"></script>
+  <script src="js/main.js"></script>
+  
+  <!-- livereload -->
+  <script src="http://localhost:35729/livereload.js"></script>
+</body>
+</html>

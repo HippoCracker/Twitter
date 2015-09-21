@@ -1,0 +1,303 @@
+// susy setup ----------------------------------------------
+$susy: (
+	columns: 16,
+	container: 1140px,
+	debug: (image: hide),
+	global-box-sizing: border-box
+);
+@include border-box-sizing;
+
+$small	: 5em;
+$medium	: 36em;
+$large	: 60em;
+
+
+$wrap-cols: 16;
+
+
+// wrap ----------------------------------------------------
+.wrap {
+	@include container();
+	position: relative;
+}//wrap
+
+.layout {
+	@include container();
+	max-width: 960px;
+	margin-left: auto;
+	margin-rigth: auto;
+
+}
+
+// hero ----------------------------------------------------
+.hero {
+	@include cf;
+	border-bottom: 1px solid $lightgray;
+}//hero
+
+// hero-container -------------------------------------------
+.hero-container {
+	background: url(../images/bg/login_header_bg.png);
+	width: 100%;
+	background-size: cover;
+	bakcground-position: center;
+}//hero-container
+
+
+/* -------------------------------------
+breakpoint(small)
+------------------------------------- */
+@include susy-breakpoint($small $medium, 16) {
+
+	.hero-container {
+		padding-bottom: 20px;
+	}//hero-container
+
+	.hero-content {
+		h2 {
+			font-size: 1.6rem;
+		}//h2
+		p.blurb {
+			display: none;
+		}//p.blurb
+	}//hero-content
+	nav {
+		font-size: 1rem;
+		ul {
+			@include cf;
+			width: span(16);
+			li {
+				@include span(16);
+			}//li
+		}//ul
+	}//nav
+	.contents {
+		@include cf;
+		padding: 0 5px;
+		article.post {
+			@include span(16);
+		}// article.post
+	}// contents
+
+
+	// user-panel.html -----------------
+	.top-menu {
+		.tweet {
+			display: none;
+		}//tweet
+		.btn-group {
+			span {
+				display: none;
+			}//span
+		}//btn-group
+	}//top-menu
+
+	.contents {
+		margin: 0 auto;
+		.left-area {
+			.profile-card {
+				display: none;
+			}//profile-card
+			.recommend-blog {
+				display: none;
+			}//recommend-blog
+		}//left-area
+
+		.right-area {
+			@include span(16);
+			padding-left: 5px;;
+		}//right-area
+	}//contents
+
+	.user-tweets article:first-child {
+		margin-top: 0;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		border-top: 0;
+	}//:first-child
+
+	.tweet-box {
+		form {
+			margin-left: span(2);
+
+			.tweet-content {
+				@include span(13 of 16);
+			}
+			.tweet-button {
+				@include span(2);
+			}
+		}//form
+	}//tweet-box
+}//breakpoint(small medium)
+
+
+/* -------------------------------------
+breakpoint(medium -> large)
+------------------------------------- */
+@include susy-breakpoint($medium $large, 16) {
+	.hero-container {
+		padding-bottom: 30px;
+	}//hero-container
+	.hero-content {
+		h2 {
+			font-size: 1.8rem;
+		}//h2
+		p.blurb {
+			font-size: 1.2rem;
+		}//p.blurb
+	}//hero-content
+	nav {
+		font-size: 1.1rem;
+		ul {
+			@include cf;
+			li {
+				@include span(2 of 12);
+				a {
+					@include span(2 of 2);
+				}//a
+			}//li
+		}//ul
+	}//nav
+	.contents {
+		@include cf;
+		
+		article {
+			margin-right: 2%;
+			width: 45%;
+			float: left;
+		}//article.post
+	}// contents
+
+
+
+	// user-panel.html -----------------
+	.top-menu {
+		.btn-group {
+			span {
+				display: none;
+			}//span
+		}//btn-group
+	}//top-menu
+
+	.contents {
+		.left-area {
+			.profile-card {
+				display: none;
+			}//profile-card
+			.recommend-blog {
+				display: none;
+			}//recommend-blog
+		}//left-area
+
+		.right-area {
+			width: 90%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}//contents
+
+	.tweet-box {
+		form {
+			margin-left: span(1.5);
+
+			.tweet-content {
+				@include span(13.5 of 16);
+			}
+			button.tweet-button {
+				@include span(2);
+			}
+		}//form
+	}//tweet-box
+
+	.user-tweets {
+		.tweet {
+			width: 48%;
+		}
+	
+	}//user-tweets
+
+}//breakpoint(medium large)
+
+
+
+/* -------------------------------------
+breakpoint($large)
+------------------------------------- */
+@include susy-breakpoint($large, 16) {
+	.hero-container {
+		padding-bottom: 50px;
+	}//hero-container
+
+	.hero-content {
+		h2 {
+			font-size: 2rem;
+		}
+		p.blurb {
+			font-size: 1.3rem;
+		}//p.blurb
+	}//hero-content
+	nav {
+		font-size: 1.2rem;
+		ul {
+			@include cf;
+			li {
+				@include span(2 of 12);
+				a {
+					width: span(2 of 2);
+				}//a
+			}//li
+		}//ul
+	}//nav
+	.contents {
+		margin: 0 auto;
+		@include cf;
+		max-width: 960px;
+
+		article.post {
+			width: 30%;
+			float: left;
+		}// article.post
+	}//contents
+
+
+
+	// user-panel.html -----------------
+	.contents {
+		.left-area {
+			@include span(5 of 16);
+		}//left-area
+
+		.right-area {
+			@include span(11 of 16 last);
+		}//right-area
+	}//contents
+
+	.user-tweets article:first-child {
+		margin-top: 0;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		border-top: 0;
+	}//:first-child
+
+	.tweet-box {
+		form {
+			margin-left: span(1.5);
+
+			.tweet-content {
+				@include span(14 of 16);
+			}
+			button.tweet-button {
+				@include span(2 last);
+				
+			}
+		}//form
+	}//tweet-box
+
+}// susy-breakpoint($large)
+
+
+
+
+
+
+

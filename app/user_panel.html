@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="twitterApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Twitter</title>
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+<style>
+  body {
+    background: #F5F8FA;
+  }
+</style>
+<body ng-controller="MainPageCtrl">
+  <header class="user-panel-header">
+    <div class="layout">
+      <div class="top-menu">
+        <section class="btn-group">
+          <ul>
+            <li><a href="#" class="active"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li><a href="#"><i class="fa fa-bell"></i> <span>Notification</span></a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i> <span>Message</span></a></li>
+          </ul>
+        </section><!-- btn-group -->
+        <section class="icon">
+          <i class="fa fa-twitter"></i>
+        </section><!-- icon -->
+        <section class="search-group">
+          <input type="text" placeholder="Search Twitter">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </section><!-- search-group -->
+        <section class="profile">
+          <a id="user-photo" href="#">
+            <img src="images/users/user1.jpeg" alt="User profile photo">
+          </a> 
+        </section><!-- profile -->
+        <section class="tweet">
+          <a href="#"><span><i class="fa fa-pencil"></i></span></a>
+        </section>
+        <div id="user-menu" class="dropdown-list hide">
+          <ul>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Change password</a></li>
+            <li><a href="#">Log out</a></li>
+          </ul>
+        </div><!-- more-options -->
+      </div><!-- top-menu -->
+    </div><!-- layout -->
+  </header>
+
+  <div class="page-content">
+    <section class="layout">
+      <div class="contents">
+
+        <div class="left-area">
+
+          <section class="profile-card">
+            <div class="banner"></div>
+              <section class="user-info">
+                <div class="user-name">
+                  <a href="#"><img src="images/users/user1.jpeg" alt="User Photo"></a>
+                  <div class="profile-name">
+                    <span class="screenname"><a href="#">Zesheng Zong</a></span>
+                    <span class="screenname-link"><a href="#">@Zesheng_Zong</a></span>
+                  </div><!-- profile-name -->
+                </div><!-- user-name -->
+                <div class="user-status">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <span class="status-label">TWEETS</span>
+                        <span class="status-value">0</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span class="status-label">FOLLOWING</span>
+                        <span class="status-value">0</span>
+                      </a>                    
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span class="status-label">FOLLOWERS</span>
+                        <span class="status-value">0</span>
+                      </a>                    
+                    </li>
+                  </ul>
+                </div><!-- user-status -->
+              </section><!-- user-info -->      
+            </section><!-- profile-card -->
+
+          <section class="recommend-blog">
+            <header>
+              <h3>Who to follow</h3>
+              <span><a href="#">Refresh</a></span>
+              <span><a href="#">View all</a></span>
+            </header>
+            <div class="blogs">
+              <ul>
+                <li>
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="">
+                  </a>
+                  <div class="content">
+                    <span class="screenname">
+                      <a href="#">Zesheng Zong</a>
+                    </span>
+                    <span class="screenname-link">
+                      <a href="#">@Zesheng_Zong</a>
+                    </span>
+                    <button class="btn btn-default">
+                      <i class="fa fa-user-plus"></i> Follow
+                    </button>
+                  </div><!-- content -->
+                </li>
+
+                <li>
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="">
+                  </a>
+                  <div class="content">
+                    <span class="screenname">
+                      <a href="#">Zesheng Zong</a>
+                    </span>
+                    <span class="screenname-link">
+                      <a href="#">@Zesheng_Zong</a>
+                    </span>
+                    <button class="btn btn-default">
+                      <i class="fa fa-user-plus"></i> Follow
+                    </button>
+                  </div><!-- content -->
+                </li>
+
+                <li>
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="">
+                  </a>
+                  <div class="content">
+                    <span class="screenname">
+                      <a href="#">Zesheng Zong</a>
+                    </span>
+                    <span class="screenname-link">
+                      <a href="#">@Zesheng_Zong</a>
+                    </span>
+                    <button class="btn btn-default">
+                      <i class="fa fa-user-plus"></i> Follow
+                    </button>
+                  </div><!-- content -->
+                </li>
+
+              </ul>
+            </div><!-- blogs -->
+
+            <footer>
+              <p><a href="#"><i class="fa fa-user"></i> Find people you know</a></p>
+            </footer>
+          </section><!-- recommend-blog -->
+        </div><!-- left-area -->
+
+        <div class="right-area">
+          <section class="tweet-box">
+            <div class="tweet-box-contents">
+              <img src="images/users/user1.jpeg" alt="user photo">
+              <form action="#">
+                <div class="tweet-content">
+                  <textarea id="tweet-text" class="tweet-text" placeholder="What's happing?" maxlength="140" ng-model="message" ng-trim="false"></textarea><!-- tweet-text -->
+                  <div id="counter" class="hide">
+                    <span>{{140-message.length}}</span> / 140
+                  </div>
+                  <label class="tweet-pictures-icon" for="tweet-pictures">
+                    <i class="fa fa-camera"></i>
+                  </label>
+                  <input type="file" class="tweet-pictures" id="tweet-pictures">
+                  <div id = "preview" class="preview hide">
+                  </div><!-- preview -->
+                </div><!-- tweet-content -->
+                <button class="tweet-button btn btn-default">
+                  <i class="fa fa-send"></i>
+                </button>
+              </form><!-- form -->
+            </div><!-- tweet-box-contents -->          
+          </section><!-- tweet-box -->
+          <section class="new-tweets-notice">
+            <div><a href="#">View <span class="new-tweets-num">1</span> new Tweets</a></div>
+          </section>
+          <div class="user-tweets">
+            <article class="tweet">
+              <header>
+                <div class="user-info-container">
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="user photo">
+                    <strong class="username">Zesheng Zong</strong>
+                    <span class="screenname-link">@Zesheng_Zong</span>
+                  </a>
+                </div>
+                <span class="timestamp">1h</span>
+              </header>
+              <section class="tweet-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta iure quas amet rerum vero id minus officia. Enim eius temporibus illo odio excepturi explicabo voluptatem doloremque atque placeat aperiam.</p>
+              </section>
+              <footer class="tweet-footer">
+                <ul>
+                  <li>
+                    <a href="reply" class="reply">
+                      <i class="fa fa-reply"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="retweet" class="retweet">
+                      <i class="fa fa-retweet"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="favorite" class="favorite">
+                      <i class="fa fa-thumbs-up"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer><!-- post-footer -->
+            </article><!-- tweet -->
+            <article class="tweet">
+              <header>
+                <div class="user-info-container">
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="user photo">
+                    <strong class="username">Zesheng Zong</strong>
+                    <span class="screenname-link">@Zesheng_Zong</span>
+                  </a>
+                </div>
+                <span class="timestamp">1h</span>
+              </header>
+              <section class="tweet-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta iure quas amet rerum vero id minus officia. Enim eius temporibus illo odio excepturi explicabo voluptatem doloremque atque placeat aperiam.</p>
+              </section>
+              <footer class="tweet-footer">
+                <ul>
+                  <li>
+                    <a href="reply" class="reply">
+                      <i class="fa fa-reply"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="retweet" class="retweet">
+                      <i class="fa fa-retweet"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="favorite" class="favorite">
+                      <i class="fa fa-thumbs-up"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer><!-- post-footer -->
+            </article><!-- tweet -->
+            <article class="tweet">
+              <header>
+                <div class="user-info-container">
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="user photo">
+                    <strong class="username">Zesheng Zong</strong>
+                    <span class="screenname-link">@Zesheng_Zong</span>
+                  </a>
+                </div>
+                <span class="timestamp">1h</span>
+              </header>
+              <section class="tweet-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta iure quas amet rerum vero id minus officia. Enim eius temporibus illo odio excepturi explicabo voluptatem doloremque atque placeat aperiam.</p>
+              </section>
+              <footer class="tweet-footer">
+                <ul>
+                  <li>
+                    <a href="reply" class="reply">
+                      <i class="fa fa-reply"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="retweet" class="retweet">
+                      <i class="fa fa-retweet"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="favorite" class="favorite">
+                      <i class="fa fa-thumbs-up"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer><!-- post-footer -->
+            </article><!-- tweet -->
+            <article class="tweet">
+              <header>
+                <div class="user-info-container">
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="user photo">
+                    <strong class="username">Zesheng Zong</strong>
+                    <span class="screenname-link">@Zesheng_Zong</span>
+                  </a>
+                </div>
+                <span class="timestamp">1h</span>
+              </header>
+              <section class="tweet-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta iure quas amet rerum vero id minus officia. Enim eius temporibus illo odio excepturi explicabo voluptatem doloremque atque placeat aperiam.</p>
+              </section>
+              <footer class="tweet-footer">
+                <ul>
+                  <li>
+                    <a href="reply" class="reply">
+                      <i class="fa fa-reply"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="retweet" class="retweet">
+                      <i class="fa fa-retweet"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="favorite" class="favorite">
+                      <i class="fa fa-thumbs-up"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer><!-- post-footer -->
+            </article><!-- tweet -->
+            <article class="tweet">
+              <header>
+                <div class="user-info-container">
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="user photo">
+                    <strong class="username">Zesheng Zong</strong>
+                    <span class="screenname-link">@Zesheng_Zong</span>
+                  </a>
+                </div>
+                <span class="timestamp">1h</span>
+              </header>
+              <section class="tweet-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta iure quas amet rerum vero id minus officia. Enim eius temporibus illo odio excepturi explicabo voluptatem doloremque atque placeat aperiam.</p>
+              </section>
+              <footer class="tweet-footer">
+                <ul>
+                  <li>
+                    <a href="reply" class="reply">
+                      <i class="fa fa-reply"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="retweet" class="retweet">
+                      <i class="fa fa-retweet"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="favorite" class="favorite">
+                      <i class="fa fa-thumbs-up"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer><!-- post-footer -->
+            </article><!-- tweet -->
+            <article class="tweet">
+              <header>
+                <div class="user-info-container">
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="user photo">
+                    <strong class="username">Zesheng Zong</strong>
+                    <span class="screenname-link">@Zesheng_Zong</span>
+                  </a>
+                </div>
+                <span class="timestamp">1h</span>
+              </header>
+              <section class="tweet-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta iure quas amet rerum vero id minus officia. Enim eius temporibus illo odio excepturi explicabo voluptatem doloremque atque placeat aperiam.</p>
+              </section>
+              <footer class="tweet-footer">
+                <ul>
+                  <li>
+                    <a href="reply" class="reply">
+                      <i class="fa fa-reply"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="retweet" class="retweet">
+                      <i class="fa fa-retweet"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="favorite" class="favorite">
+                      <i class="fa fa-thumbs-up"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer><!-- post-footer -->
+            </article><!-- tweet -->
+            <article class="tweet">
+              <header>
+                <div class="user-info-container">
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="user photo">
+                    <strong class="username">Zesheng Zong</strong>
+                    <span class="screenname-link">@Zesheng_Zong</span>
+                  </a>
+                </div>
+                <span class="timestamp">1h</span>
+              </header>
+              <section class="tweet-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta iure quas amet rerum vero id minus officia. Enim eius temporibus illo odio excepturi explicabo voluptatem doloremque atque placeat aperiam.</p>
+              </section>
+              <footer class="tweet-footer">
+                <ul>
+                  <li>
+                    <a href="reply" class="reply">
+                      <i class="fa fa-reply"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="retweet" class="retweet">
+                      <i class="fa fa-retweet"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="favorite" class="favorite">
+                      <i class="fa fa-thumbs-up"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer><!-- post-footer -->
+            </article><!-- tweet -->
+            <article class="tweet">
+              <header>
+                <div class="user-info-container">
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="user photo">
+                    <strong class="username">Zesheng Zong</strong>
+                    <span class="screenname-link">@Zesheng_Zong</span>
+                  </a>
+                </div>
+                <span class="timestamp">1h</span>
+              </header>
+              <section class="tweet-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta iure quas amet rerum vero id minus officia. Enim eius temporibus illo odio excepturi explicabo voluptatem doloremque atque placeat aperiam.</p>
+              </section>
+              <footer class="tweet-footer">
+                <ul>
+                  <li>
+                    <a href="reply" class="reply">
+                      <i class="fa fa-reply"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="retweet" class="retweet">
+                      <i class="fa fa-retweet"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="favorite" class="favorite">
+                      <i class="fa fa-thumbs-up"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer><!-- post-footer -->
+            </article><!-- tweet -->
+            <article class="tweet">
+              <header>
+                <div class="user-info-container">
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="user photo">
+                    <strong class="username">Zesheng Zong</strong>
+                    <span class="screenname-link">@Zesheng_Zong</span>
+                  </a>
+                </div>
+                <span class="timestamp">1h</span>
+              </header>
+              <section class="tweet-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta iure quas amet rerum vero id minus officia. Enim eius temporibus illo odio excepturi explicabo voluptatem doloremque atque placeat aperiam.</p>
+              </section>
+              <footer class="tweet-footer">
+                <ul>
+                  <li>
+                    <a href="reply" class="reply">
+                      <i class="fa fa-reply"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="retweet" class="retweet">
+                      <i class="fa fa-retweet"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="favorite" class="favorite">
+                      <i class="fa fa-thumbs-up"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer><!-- post-footer -->
+            </article><!-- tweet -->
+            <article class="tweet">
+              <header>
+                <div class="user-info-container">
+                  <a href="#">
+                    <img src="images/users/user1.jpeg" alt="user photo">
+                    <strong class="username">Zesheng Zong</strong>
+                    <span class="screenname-link">@Zesheng_Zong</span>
+                  </a>
+                </div>
+                <span class="timestamp">1h</span>
+              </header>
+              <section class="tweet-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta iure quas amet rerum vero id minus officia. Enim eius temporibus illo odio excepturi explicabo voluptatem doloremque atque placeat aperiam.</p>
+              </section>
+              <footer class="tweet-footer">
+                <ul>
+                  <li>
+                    <a href="reply" class="reply">
+                      <i class="fa fa-reply"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="retweet" class="retweet">
+                      <i class="fa fa-retweet"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="favorite" class="favorite">
+                      <i class="fa fa-thumbs-up"></i>
+                      <span class="value">0</span>
+                    </a>
+                  </li>
+                </ul>
+              </footer><!-- post-footer -->
+            </article><!-- tweet -->
+            
+          </div><!-- user-tweets -->
+        </div><!-- right-area -->
+      </div><!-- contents -->
+    </section><!-- layout -->
+  </div><!-- page-content -->
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- livereload -->
+  <script src="http://localhost:35729/livereload.js"></script>
+</body>
+</html>
